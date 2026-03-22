@@ -1,7 +1,18 @@
 /* @vitest-environment node */
 
-import { describe, expect, it } from "vitest";
-import { listPackageCatalogPage, searchPackageCatalogPublic } from "./skills";
+import { describe, expect, it, vi } from "vitest";
+
+vi.mock("convex-helpers/server/pagination", async () => {
+  const actual = await vi.importActual<typeof import("convex-helpers/server/pagination")>(
+    "convex-helpers/server/pagination",
+  );
+  return {
+    ...actual,
+    paginator: (db: unknown) => db,
+  };
+});
+
+const { listPackageCatalogPage, searchPackageCatalogPublic } = await import("./skills");
 
 type WrappedHandler<TArgs, TResult> = {
   _handler: (ctx: unknown, args: TArgs) => Promise<TResult>;

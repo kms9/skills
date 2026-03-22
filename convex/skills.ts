@@ -1,5 +1,5 @@
 import { getAuthUserId } from "@convex-dev/auth/server";
-import { getPage, type IndexKey } from "convex-helpers/server/pagination";
+import { getPage, type IndexKey, paginator } from "convex-helpers/server/pagination";
 import { paginationOptsValidator } from "convex/server";
 import { ConvexError, v, type Value } from "convex/values";
 import { internal } from "./_generated/api";
@@ -2767,7 +2767,7 @@ export const listPackageCatalogPage = query({
       if (effectivePageSize <= 0) break;
       remainingScanBudget -= effectivePageSize;
       const pageCursor = cursor;
-      const page = await ctx.db
+      const page = await paginator(ctx.db, schema)
         .query("skillSearchDigest")
         .withIndex("by_active_updated", (q) => q.eq("softDeletedAt", undefined))
         .order("desc")
@@ -2840,7 +2840,7 @@ export const searchPackageCatalogPublic = query({
       const effectivePageSize = Math.min(pageSize, remainingScanBudget);
       if (effectivePageSize <= 0) break;
       remainingScanBudget -= effectivePageSize;
-      const page = await ctx.db
+      const page = await paginator(ctx.db, schema)
         .query("skillSearchDigest")
         .withIndex("by_active_updated", (q) => q.eq("softDeletedAt", undefined))
         .order("desc")

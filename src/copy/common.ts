@@ -1,0 +1,43 @@
+export const commonCopy = {
+  generic: {
+    loading: '加载中…',
+    noSummary: '暂无简介。',
+    noTags: '暂无标签。',
+  },
+  actions: {
+    search: '搜索',
+    upload: '上传',
+    signIn: '登录',
+    signOut: '退出登录',
+    report: '举报',
+    manage: '管理',
+    cancel: '取消',
+    submit: '提交',
+    loadMore: '加载更多',
+    scrollToLoadMore: '滚动以加载更多',
+    dashboard: '控制台',
+    settings: '设置',
+    import: '导入',
+  },
+  nouns: {
+    skills: '技能',
+    souls: '灵魂',
+    skill: '技能',
+    soul: '灵魂',
+  },
+  theme: {
+    openMenu: '打开菜单',
+    mode: '主题模式',
+    system: '跟随系统',
+    light: '浅色',
+    dark: '深色',
+    systemTheme: '系统主题',
+    lightTheme: '浅色主题',
+    darkTheme: '深色主题',
+  },
+  user: {
+    authorPrefix: '作者',
+    fallbackLabel: '用户',
+    avatarAlt: '用户头像',
+  },
+} as const

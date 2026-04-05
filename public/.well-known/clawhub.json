@@ -1,0 +1,6 @@
+{
+  "apiBase": "https://registry.example.com",
+  "authBase": "https://registry.example.com",
+  "minCliVersion": "0.7.1",
+  "registry": "https://registry.example.com"
+}

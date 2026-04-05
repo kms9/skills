@@ -1,0 +1,15 @@
+# Test Configuration
+server:
+  port: "10081"
+
+database:
+  url: "postgres://postgres:postgres@localhost:5432/clawhub_test?sslmode=disable"
+  max_connections: 25
+
+oss:
+  endpoint: "s3.example.com"
+  bucket: "test-bucket"
+  region: "us-east-1"
+  access_key_id: "test-key"
+  access_key_secret: "test-secret"
+  use_internal: false

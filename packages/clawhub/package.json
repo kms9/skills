@@ -1,0 +1,46 @@
+{
+  "name": "clawhub",
+  "version": "0.7.1",
+  "description": "ClawHub CLI \\u2014 install, update, search, and publish agent skills.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "clawhub": "bin/clawhub.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": "./dist/cli.js",
+    "./cliApp": "./dist/cliApp.js",
+    "./runtime": "./dist/runtime.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "node --enable-source-maps dist/cli.js",
+    "prepublishOnly": "bun ../../scripts/generate-well-known.ts && npm run build"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "arktype": "^2.1.29",
+    "commander": "^14.0.2",
+    "fflate": "^0.8.2",
+    "ignore": "^7.0.5",
+    "json5": "^2.2.3",
+    "mime": "^4.1.0",
+    "ora": "^9.0.0",
+    "p-retry": "^7.1.1",
+    "semver": "^7.7.3",
+    "undici": "^7.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

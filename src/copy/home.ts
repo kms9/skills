@@ -1,0 +1,35 @@
+import { getSkillsBrandName } from '../lib/brand'
+
+export const homeCopy = {
+  skills: {
+    heroBadge: '轻装上阵，专为 Agent 而生。',
+    heroTitle: `${getSkillsBrandName()}，面向高效 Agent 的技能码头。`,
+    heroSubtitle: '上传 AgentSkills 套件，像 npm 一样做版本管理，并让技能可以被快速搜索和复用。',
+    publish: '发布技能',
+    browse: '浏览技能',
+    searchStat: '搜索技能，版本清晰，可随时回滚。',
+    highlightedTitle: '精选技能',
+    highlightedSubtitle: '人工挑选的高信号技能，帮助你更快建立信任。',
+    highlightedEmpty: '还没有精选技能。',
+    highlightedSummaryFallback: '一个刚刚上架的技能包。',
+    popularTitle: '热门技能',
+    popularSubtitle: '下载量更高、风险更低的优先选择。',
+    popularEmpty: '还没有技能，来发布第一个吧。',
+    popularSummaryFallback: '一个适合 Agent 的技能包。',
+    seeAll: '查看全部技能',
+  },
+  souls: {
+    heroBadge: '共享 SOUL.md。',
+    heroTitle: 'SoulHub，承载系统设定与经验沉淀的地方。',
+    heroSubtitle: '分享 SOUL.md 套件，像文档一样管理版本，把个人系统设定集中保存与传播。',
+    publish: '发布灵魂',
+    browse: '浏览灵魂',
+    searchPlaceholder: '搜索灵魂、提示词或设定',
+    searchStat: '搜索灵魂内容，版本清晰、易读、便于二次改造。',
+    latestTitle: '最新灵魂',
+    latestSubtitle: '查看全站最新发布的 SOUL.md 套件。',
+    latestEmpty: '还没有灵魂内容，来发布第一个吧。',
+    latestSummaryFallback: '一个 SOUL.md 套件。',
+    seeAll: '查看全部灵魂',
+  },
+} as const

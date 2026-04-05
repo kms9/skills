@@ -1,0 +1,61 @@
+export const importCopy = {
+  providers: {
+    gitHub: "GitHub",
+    gitLab: "GitLab",
+  },
+  placeholders: {
+    gitHub: "https://github.com/owner/repo",
+    gitLab: "https://gitlab.com/group/project",
+  },
+  hints: {
+    gitHub: "仓库、tree 路径或 blob 链接",
+    gitLab: "项目、tree 路径或 blob 链接",
+  },
+  status: {
+    ready: "已完成预览，准备导入。",
+    runDetectionAgain: "请先重新检测。",
+    foundSkills: "检测到 {count} 个技能，请选择一个。",
+    fetchingFiles: "正在从 {provider} 拉取文件…",
+    downloadingFile: "正在下载 {path}…",
+    publishing: "正在发布…",
+    imported: "导入成功。",
+  },
+  errors: {
+    previewFailed: "预览失败。",
+    candidateNotFound: "未找到候选技能。",
+    noFilesSelected: "请至少选择一个文件。",
+    downloadFailed: "下载 {path} 失败。",
+  },
+  auth: {
+    loading: "加载中…",
+    required: "登录后才能导入并发布技能。",
+  },
+  header: {
+    kicker: "{provider} 导入",
+    title: "从 GitHub 或 GitLab 导入",
+    subtitle:
+      "仅支持公开仓库。系统会自动识别 SKILL.md，并固定到解析出的 commit。",
+    publicOnly: "仅公开仓库",
+    commitPinned: "固定 commit",
+  },
+  form: {
+    sourceUrl: "{provider} 链接",
+    detect: "开始检测",
+    pickSkill: "选择技能",
+    repoRoot: "仓库根目录",
+    slug: "标识（slug）",
+    slugHint: "唯一且使用小写",
+    displayName: "显示名称",
+    displayNameHint: "列表中展示的名称",
+    version: "版本",
+    versionHint: "Semver",
+    tags: "标签",
+    tagsHint: "使用逗号分隔",
+    files: "文件",
+    selectReferenced: "选择引用文件",
+    selectAll: "全选",
+    clear: "清空",
+    selectedSummary: "已选择：{selected}/{total} · {size}",
+    importAndPublish: "导入并发布",
+  },
+} as const;

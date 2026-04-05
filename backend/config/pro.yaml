@@ -1,0 +1,67 @@
+# ClawHub Backend Configuration
+
+server:
+  port: "10081"
+
+database:
+  url: "postgres://postgres:postgres@db.example.com:5432/clawhub?sslmode=disable"
+  max_connections: 25
+
+oss:
+  endpoint: "s3.example.com"
+  bucket: "clawhub-prod"
+  region: "us-east-1"
+  access_key_id: "replace-me"
+  access_key_secret: "replace-me"
+  use_internal: false
+
+# Auth configuration
+# Environment variables (override config file values in production):
+#   GITHUB_CLIENT_ID     - GitHub OAuth App client ID
+#   GITHUB_CLIENT_SECRET - GitHub OAuth App client secret
+#   GITLAB_ENABLED       - Enable GitLab Self-Managed OIDC
+#   GITLAB_BASE_URL      - GitLab base URL (e.g. https://gitlab.example.com)
+#   GITLAB_DISCOVERY_URL - Optional explicit OIDC discovery URL
+#   GITLAB_CLIENT_ID     - GitLab OAuth/OIDC application ID
+#   GITLAB_CLIENT_SECRET - GitLab OAuth/OIDC application secret
+#   GITLAB_IMPORT_TOKEN  - Fixed PAT/token for private GitLab import proxy
+#   GITLAB_CA_CERT_FILE  - Optional custom CA certificate file for private GitLab TLS
+#   JWT_SECRET           - Secret key for signing JWT tokens (use a long random string)
+#   FRONTEND_URL         - Frontend base URL for OAuth redirect (e.g. https://clawhub.example.com)
+auth:
+  github_client_id: ""
+  github_client_secret: ""
+  jwt_secret: "replace-with-a-long-random-secret"
+  frontend_url: "https://app.example.com"
+  oauth_public_base_url: "https://api.example.com"
+  allowed_email_domains: []
+  superusers:
+    providers: {}
+  github:
+    enabled: false
+    client_id: ""
+    client_secret: ""
+  gitlab:
+    enabled: false
+    base_url: "https://gitlab.example.com"
+    discovery_url: ""
+    client_id: ""
+    client_secret: ""
+    import_token: ""
+    scopes:
+      - "openid"
+      - "profile"
+      - "email"
+    allowed_groups: []
+    ca_cert_file: ""
+  feishu:
+    enabled: false
+    app_id: ""
+    app_secret: ""
+  smtp:
+    host: "smtp.example.com"
+    port: 465
+    username: ""
+    password: ""
+    from: ""
+    use_tls: true

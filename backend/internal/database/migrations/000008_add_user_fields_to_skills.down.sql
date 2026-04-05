@@ -1,0 +1,2 @@
+ALTER TABLE skills DROP COLUMN IF EXISTS owner_user_id;
+ALTER TABLE skills DROP COLUMN IF EXISTS stats_stars;

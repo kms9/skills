@@ -1,0 +1,69 @@
+services:
+  postgres:
+    image: ${POSTGRES_IMAGE:-postgres:16-alpine}
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-clawhub}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - '${POSTGRES_HOST_PORT:-5432}:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./backend/data/docker-init.sql:/docker-entrypoint-initdb.d/01-docker-init.sql:ro
+      - ./backend/data/schema.sql:/docker-entrypoint-initdb.d/02-schema.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-clawhub}']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      args:
+        GO_IMAGE: ${GO_IMAGE:-golang:1.25-alpine}
+        ALPINE_IMAGE: ${ALPINE_IMAGE:-alpine:3.22}
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      GO_ENV: local
+      PORT: ${BACKEND_PORT:-8080}
+      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-clawhub}?sslmode=disable
+      JWT_SECRET: change-me
+      OSS_ENDPOINT: ''
+      OSS_BUCKET: ''
+      OSS_REGION: ''
+      OSS_ACCESS_KEY_ID: ''
+      OSS_ACCESS_KEY_SECRET: ''
+      FRONTEND_URL: http://localhost:${FRONTEND_HOST_PORT:-10091}
+    ports:
+      - '${BACKEND_HOST_PORT:-10081}:${BACKEND_PORT:-8080}'
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        BUN_IMAGE: ${BUN_IMAGE:-oven/bun:1.3.6}
+        NPM_REGISTRY: ${NPM_REGISTRY:-https://registry.npmjs.org}
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_started
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOST: 0.0.0.0
+      BACKEND_URL: http://backend:${BACKEND_PORT:-8080}
+      VITE_SITE_URL: http://localhost:10091
+      VITE_API_BASE: /api/v1
+      VITE_BACKEND_BASE: ''
+    ports:
+      - '${FRONTEND_HOST_PORT:-10091}:3000'
+
+volumes:
+  postgres-data:

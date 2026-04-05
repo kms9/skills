@@ -55,6 +55,13 @@ Operate the registry with management views for reviewing users, moderating conte
 
 ![Admin dashboard](docs/static/admin-dashboard.png)
 
+## Roadmap
+
+- Add a dedicated page for curated collections / favorites
+- Allow administrators to manage and recommend featured collections
+- Support one-command batch installation for a full collection
+- Continue improving self-hosted deployment and platform operations
+
 ## Tech Stack
 
 - Frontend: TanStack Start + React + Vite + Bun
@@ -168,6 +175,8 @@ bun run lint
 bun run test
 bun run deploy:docker
 ```
+
+
 
 ## Security and Release Notes
 
